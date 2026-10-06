@@ -69,7 +69,7 @@ L'opérateur reste décisionnaire et peut ignorer ou contredire l'alerte après 
 
 **Qualification AI Act** : _niveau + cas du texte (ou pourquoi aucun) + condition de bascule._
 
-xA priori **pas un système à haut risque au sens de l'annexe III** : le modèle surveille un procédé industriel et ne prend pas de décision concernant des personnes physiques.
+A priori **pas un système à haut risque au sens de l'annexe III** : le modèle surveille un procédé industriel et ne prend pas de décision concernant des personnes physiques.
 
 Il reste un système d'IA soumis aux obligations générales applicables.  
 
