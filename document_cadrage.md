@@ -91,12 +91,37 @@ plausibles minimum, les autres écartées en 1 ligne. Mitiger ≠ supprimer.
 | Indisponibilité ou perte du modèle / flux de données | Élevée dans un environnement industriel | Monitoring du service, alertes en cas de données absentes, mode dégradé et conservation des alarmes industrielles classiques | 🟡 Une panne peut temporairement supprimer l'aide apportée par le modèle |
 
 ## 5. Architecture cible et sobriété — mini-cours `05`
-_Renvoi à `schema_archi_cible.md` (Mermaid ≥ 4 composants). **LLM retenu ou
-refusé : 3 lignes.** Ce que tu écartes, et pourquoi._
+
+Voir `schema_archi_cible.md`.
+
+L'architecture retenue reste volontairement simple : récupération des données issues de la supervision, stockage de l'historique, modèle de détection de dérive, validation humaine, puis journalisation des alertes et des décisions.
+
+**LLM retenu ou refusé :**  
+Le recours à un LLM est écarté. Le besoin porte sur l'analyse de séries temporelles numériques issues de capteurs, et non sur du texte ou de la génération de contenu. Un modèle de machine learning classique ou de détection d'anomalies est donc plus adapté, plus simple à maintenir et moins coûteux.
+
+**Ce qu'on écarte :**  
+Pas de RAG, de base vectorielle ou de système multi-agents, car ces briques n'apportent pas de valeur ici. La décision de maintenance n'est pas automatisée : le technicien reste responsable de la validation finale.
 
 ## 6. Indicateurs, seuils, questions ouvertes — mini-cours `03`
+
 | Indicateur | Cible | Seuil d'acceptabilité | Comment on le mesure |
 |---|---|---|---|
-| | | | |
+| Taux de pannes détectées à l'avance | ≥ 90 % | ≥ 80 % | Nombre de pannes ayant généré une alerte avant l'arrêt / nombre total de pannes |
+| Part des pannes détectées au moins 48h avant | ≥ 80 % | ≥ 60 % | Comparaison entre l'heure de l'alerte et l'heure réelle de la panne ou de l'intervention |
+| Délai moyen d'anticipation | ≥ 48 h | ≥ 24 h | Temps moyen entre la première alerte pertinente et la panne / intervention |
+| Faux positifs | À définir avec le client, idéalement très faibles | À définir | Nombre d'alertes non suivies d'une panne ou d'une intervention pertinente |
+| Faux négatifs | Le plus proche possible de 0 | À définir, mais faible | Nombre de pannes n'ayant donné lieu à aucune alerte préalable |
+| Disponibilité du système de détection | ≥ 99 % | ≥ 95 % | Temps pendant lequel le système reçoit les données et produit correctement ses analyses |
+| Qualité des données reçues | ≥ 99 % de mesures exploitables | ≥ 95 % | Taux de mesures reçues sans valeur manquante, incohérente ou hors format |
+| Gain économique | Éviter au moins 10 pannes/an | Projet rentable par rapport au budget engagé | Nombre de pannes évitées × coût moyen d'une panne, comparé au coût de la solution |
 
-_Prochaines étapes (3) + **questions ouvertes** au client (reprises de `notes_entretien.md` §3)._
+Prochaines étapes (3) + **questions ouvertes** au client (reprises de `notes_entretien.md` §3)._
+### Questions ouvertes
+
+- Combien de fausses alertes par mois les équipes considèrent-elles comme acceptables ?
+- Quel taux minimal de pannes détectées serait jugé suffisant pour valider le POC ?
+- Quel niveau d'anticipation reste utile si les 48h ne sont pas atteintes ?
+- Qui reçoit l'alerte et qui décide réellement de lancer une intervention ?
+- Où la solution devra-t-elle être hébergée : sur site, sur le SI existant ou dans le cloud ?
+- Les historiques de maintenance contiennent-ils des données personnelles ou des informations confidentielles ?
+- Les données des deux dernières années sont-elles complètes et homogènes sur tous les bains ?
