@@ -82,6 +82,7 @@ Il n'y a pas de profilage de personnes physiques. L'article 22 n'est pas applica
 | Surconfiance dans la recommandation du modèle | 🟠 | Un opérateur pourrait considérer toute alerte comme certaine                                       | Présenter le système comme une aide à la décision, afficher les mesures responsables de l'alerte et conserver une validation humaine |
 | Traçabilité insuffisante des alertes | 🟡 | Difficile d'expliquer après coup pourquoi une alerte a été produite                                | Journaliser les entrées, le score, les seuils, la version du modèle et la décision de l'opérateur |
 | Introduction future de données personnelles | 🟡 | Des données de maintenance pourraient contenir des noms ou identifiants d'opérateurs               | Minimisation / pseudonymisation et réévaluation RGPD avant leur intégration |
+| Arrêt automatique injustifié du bain | 🔴 | Un faux positif pourrait provoquer un arrêt de production et des pertes importantes | Pas d'arrêt automatique à ce stade ; alerte + validation humaine obligatoire |
 
 **Sécurité du modèle** — selon l'**exposition** de ton archi : 2 menaces
 plausibles minimum, les autres écartées en 1 ligne. Mitiger ≠ supprimer.
@@ -101,6 +102,11 @@ Le recours à un LLM est écarté. Le besoin porte sur l'analyse de séries temp
 
 **Ce qu'on écarte :**  
 Pas de RAG, de base vectorielle ou de système multi-agents, car ces briques n'apportent pas de valeur ici. La décision de maintenance n'est pas automatisée : le technicien reste responsable de la validation finale.
+
+**Évolution envisagée mais non retenue à ce stade : arrêt automatique du bain.**  
+Cette option augmente fortement le risque métier car la sortie du modèle déclencherait directement une action sur le procédé industriel. 
+
+Tant que les performances du modèle n'ont pas été validées sur un historique représentatif et que les règles de sécurité n'ont pas été définies avec le client, la validation humaine reste obligatoire.
 
 ## 6. Indicateurs, seuils, questions ouvertes — mini-cours `03`
 
