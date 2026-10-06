@@ -9,6 +9,17 @@
 ## 1. Synthèse exécutive (5-6 lignes — rédigée EN DERNIER)
 _Besoin réel + solution proposée (famille, pas la stack) + 2-3 indicateurs clés._
 
+## Synthèse exécutive
+
+Galvaplus subit aujourd'hui plusieurs pannes de bains par mois, avec un coût moyen annoncé d'environ 30 000 € par arrêt non planifié. L'objectif du projet est d'anticiper ces dérives suffisamment tôt pour permettre une intervention planifiée, idéalement 48 heures avant la panne.
+
+Les données disponibles sont pertinentes pour une première approche : mesures horaires de température, pH et niveau, conservées depuis deux ans, ainsi qu'un historique séparé des interventions de maintenance préventive. Cet historique est essentiel, car certaines pannes ont déjà été évitées grâce à l'expérience des techniciens.
+
+Nous recommandons une architecture volontairement sobre, basée sur un modèle de machine learning classique appliqué aux séries temporelles des capteurs. Le recours à un LLM, à un RAG, à une base vectorielle ou à des agents n'est pas retenu, car ces briques n'apportent pas de valeur directe au besoin.
+
+Le système proposé analyse les dérives, calcule un risque de panne et génère une alerte lorsqu'un seuil est dépassé. La décision finale reste humaine : un technicien valide ou écarte l'alerte avant toute intervention. L'arrêt automatique du bain n'est pas retenu à ce stade, même avec un score de confiance élevé, tant que les performances du modèle et les règles de sécurité n'ont pas été validées sur des données réelles.
+
+La première étape recommandée est un POC sur l'historique disponible, avec des critères de succès mesurables : taux de pannes détectées, délai d'anticipation, nombre de faux positifs et faux négatifs, et gain économique potentiel. Au regard du budget annoncé de 60 à 80 k€ la première année, cette approche permet de démontrer rapidement la valeur avant une éventuelle industrialisation.
 > **Imprévu client (14h30) — ce que ça change** : _1-2 lignes : quelle contrainte
 > a bougé, quelles sections tu as mises à jour (données ? risques ? archi ? KPI ?)._
 
